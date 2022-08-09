@@ -1,0 +1,15 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "todohighlight.keywords": [
+    "DEBUG:",
+    "REVIEW:",
+    "FIXME:",
+    {
+      "text": "NOTE:",
+      "color": "white",
+      "backgroundColor": "#6cb000",
+      "isWholeLine": false
+    }
+  ]
+}
