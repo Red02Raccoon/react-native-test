@@ -1,13 +1,8 @@
 import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Platform,
-  SafeAreaView,
-  TouchableOpacity,
-} from 'react-native';
+import { StyleSheet, Text, View, Platform, SafeAreaView } from 'react-native';
+
+import { ColorBox } from './components';
 
 const colors = [
   { color: '#2aa198' },
@@ -32,19 +27,7 @@ export default function App() {
       ]}
     >
       <View style={styles.inner}>
-        <Text>Choose your color 🎉🎉🎉</Text>
-
-        <View style={styles.box}>
-          {colors.map(({ color }) => (
-            <TouchableOpacity
-              style={[styles.boxItem, { backgroundColor: color }]}
-              key={color}
-              onPress={handleColorChange(color)}
-            >
-              <Text>{color}</Text>
-            </TouchableOpacity>
-          ))}
-        </View>
+        <ColorBox colors={colors} onColorClick={handleColorChange} />
       </View>
 
       <StatusBar style="auto" />
@@ -75,20 +58,5 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 30,
     backgroundColor: 'white',
-  },
-  box: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginTop: 10,
-  },
-  boxItem: {
-    width: 65,
-    height: 65,
-    marginHorizontal: 3,
-    marginVertical: 3,
-    alignContent: 'center',
-    justifyContent: 'center',
-    borderRadius: 5,
-    textAlign: 'center',
   },
 });
