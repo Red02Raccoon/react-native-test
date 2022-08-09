@@ -1,12 +1,18 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
 
 const ColorBox = ({ title = 'Choose your color', colors, onColorClick }) => {
   return (
     <View>
-      <Text style={styles.title}>{title} 🎉🎉🎉</Text>
-
-      <View style={styles.box}>
-        {colors.map(({ color }) => (
+      <FlatList
+        data={colors}
+        keyExtractor={(item) => item.color}
+        renderItem={({ item: { color } }) => (
           <TouchableOpacity
             style={[styles.boxItem, { backgroundColor: color }]}
             key={color}
@@ -14,8 +20,10 @@ const ColorBox = ({ title = 'Choose your color', colors, onColorClick }) => {
           >
             <Text>{color}</Text>
           </TouchableOpacity>
-        ))}
-      </View>
+        )}
+        numColumns={3}
+        ListHeaderComponent={<Text style={styles.title}>{title} 🎉🎉🎉</Text>}
+      />
     </View>
   );
 };

@@ -9,6 +9,11 @@ const colors = [
   { color: '#268bd2' },
   { color: '#d33682' },
   { color: '#cb4b16' },
+  { color: '#b58900' },
+  { color: '#6c71c4' },
+  { color: '#859900' },
+  { color: '#fdf6e3' },
+  { color: '#268b56' },
 ];
 
 export default function App() {
