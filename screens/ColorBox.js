@@ -3,19 +3,9 @@ import { StyleSheet, View, Platform } from 'react-native';
 
 import { ColorBox } from '../components';
 
-const colors = [
-  { color: '#2aa198' },
-  { color: '#268bd2' },
-  { color: '#d33682' },
-  { color: '#cb4b16' },
-  { color: '#b58900' },
-  { color: '#6c71c4' },
-  { color: '#859900' },
-  { color: '#fdf6e3' },
-  { color: '#268b56' },
-];
+const ColorBoxScreen = ({ route }) => {
+  const { paletteName, colors } = route.params;
 
-const ColorBoxScreen = () => {
   const [currentColor, setCurrentColor] = useState(null);
 
   const handleColorChange = (color) => () => {
@@ -31,7 +21,11 @@ const ColorBoxScreen = () => {
       ]}
     >
       <View style={styles.inner}>
-        <ColorBox colors={colors} onColorClick={handleColorChange} />
+        <ColorBox
+          title={paletteName}
+          colors={colors}
+          onColorClick={handleColorChange}
+        />
       </View>
     </View>
   );

@@ -6,29 +6,37 @@ import {
   FlatList,
 } from 'react-native';
 
-const ColorBox = ({ title = 'Choose your color', colors, onColorClick }) => {
+const ColorBox = ({ title, colors, onColorClick }) => {
   return (
     <View>
       <FlatList
         data={colors}
-        keyExtractor={(item) => item.color}
-        renderItem={({ item: { color } }) => (
+        keyExtractor={(item) => item.hexCode}
+        renderItem={({ item: { hexCode } }) => (
           <TouchableOpacity
-            style={[styles.boxItem, { backgroundColor: color }]}
-            key={color}
-            onPress={onColorClick(color)}
+            style={[styles.boxItem, { backgroundColor: hexCode }]}
+            key={hexCode}
+            onPress={onColorClick(hexCode)}
           >
-            <Text>{color}</Text>
+            <Text>{hexCode}</Text>
           </TouchableOpacity>
         )}
         numColumns={3}
-        ListHeaderComponent={<Text style={styles.title}>{title} 🎉🎉🎉</Text>}
+        ListHeaderComponent={
+          <View>
+            <Text style={[styles.title, styles.titleBold]}>{title}</Text>
+            <Text style={styles.title}>Choose your color 🎉</Text>
+          </View>
+        }
       />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  titleBold: {
+    fontWeight: 'bold',
+  },
   title: { textAlign: 'center' },
   box: {
     flexDirection: 'row',
@@ -44,6 +52,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 5,
     textAlign: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 1,
+    elevation: 2,
   },
 });
 

@@ -1,17 +1,19 @@
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
-import { SCREENS } from '../constants';
+import { SCREENS, COLOR_PALETTES } from '../constants';
+import { ColorsPreview } from '../components';
 
 const Home = ({ navigation }) => {
-  const handleButtonPress = () => {
-    navigation.navigate(SCREENS.colorBox);
+  const handleButtonPress = (palette) => () => {
+    navigation.navigate(SCREENS.colorBox, palette);
   };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={handleButtonPress}>
-        <Text style={styles.buttonTitle}>Go to {SCREENS.colorBox}</Text>
-      </TouchableOpacity>
+      <ColorsPreview
+        colors={COLOR_PALETTES}
+        onPaletteClick={handleButtonPress}
+      />
     </View>
   );
 };
@@ -19,17 +21,6 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-  },
-  button: {
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    backgroundColor: 'rgb(102, 102, 191)',
-    maxWidth: 150,
-    textAlign: 'center',
-    borderRadius: 5,
-  },
-  buttonTitle: {
-    color: 'white',
   },
 });
 
