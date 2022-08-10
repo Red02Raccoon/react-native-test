@@ -1,67 +1,20 @@
-import { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Platform, SafeAreaView } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import { ColorBox } from './components';
+import { Home, ColorBox } from './screens';
+import { SCREENS } from './constants';
 
-const colors = [
-  { color: '#2aa198' },
-  { color: '#268bd2' },
-  { color: '#d33682' },
-  { color: '#cb4b16' },
-  { color: '#b58900' },
-  { color: '#6c71c4' },
-  { color: '#859900' },
-  { color: '#fdf6e3' },
-  { color: '#268b56' },
-];
+const Stack = createStackNavigator();
 
-export default function App() {
-  const [currentColor, setCurrentColor] = useState(null);
-
-  const handleColorChange = (color) => () => {
-    setCurrentColor(color);
-  };
-
+const App = () => {
   return (
-    <SafeAreaView
-      style={[
-        styles.container,
-        styles.color,
-        currentColor && { backgroundColor: currentColor },
-      ]}
-    >
-      <View style={styles.inner}>
-        <ColorBox colors={colors} onColorClick={handleColorChange} />
-      </View>
-
-      <StatusBar style="auto" />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name={SCREENS.home} component={Home} />
+        <Stack.Screen name={SCREENS.colorBox} component={ColorBox} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-  },
-  color: {
-    ...Platform.select({
-      android: {
-        backgroundColor: 'green',
-      },
-      default: {
-        backgroundColor: 'pink',
-      },
-    }),
-  },
-  inner: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 10,
-    paddingHorizontal: 30,
-    backgroundColor: 'white',
-  },
-});
+export default App;
