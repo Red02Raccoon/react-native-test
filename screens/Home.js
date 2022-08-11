@@ -1,7 +1,13 @@
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 
 import { SCREENS, COLOR_PALETTES, initialImage } from '../constants';
-import { ColorsPreview, ImagePreview } from '../components';
+import { ColorsPreview, ImagePreview, Button } from '../components';
 
 const Home = ({ navigation }) => {
   const handleButtonPress = (palette) => () => {
@@ -12,8 +18,16 @@ const Home = ({ navigation }) => {
     navigation.navigate(SCREENS.gallery);
   };
 
+  const handleOrdersClick = () => {
+    navigation.navigate(SCREENS.orders);
+  };
+
   return (
-    <View>
+    <ScrollView>
+      <View style={[styles.box, styles.container]}>
+        <Button onPress={handleOrdersClick}>See all orders</Button>
+      </View>
+
       <View style={[styles.box, styles.container]}>
         <Text style={styles.title}>Color Box</Text>
         <ColorsPreview
@@ -29,7 +43,7 @@ const Home = ({ navigation }) => {
           <ImagePreview uri={initialImage} />
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -46,6 +60,25 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 15,
   },
+  inputPadding: { padding: 5 },
+  input: {
+    borderWidth: 1,
+    borderColor: 'grey',
+    marginBottom: 20,
+  },
+  switch: { marginRight: 'auto' },
+  label: {
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  button: {
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    backgroundColor: '#37819d',
+    borderRadius: 10,
+    marginTop: 10,
+  },
+  buttonText: { color: 'white', textAlign: 'center' },
 });
 
 export default Home;
